@@ -6,7 +6,12 @@ namespace CustomersApp;
 
 internal class Program
 {
+    static void Main(string[] args)
+    { 
+    
+    }
 
+    /*--------------- 3 --------------------*/
     public class Customer
     {
         public int Id { get; set; }
@@ -26,7 +31,7 @@ internal class Program
         public Customer Customer { get; set; } = null!;
     }
 
-    /*----------------------------------------------------------------------------------*/
+    /*---------------------------------- 4 ------------------------------------------------*/
 
     public class ApplicationContext : DbContext
     {
@@ -45,22 +50,27 @@ internal class Program
         }
     }
 
-    /*-----------------------------------------------------------------------------------*/
+    /*---------------------------------------- 5 -------------------------------------------*/
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+
         // Specificerar vilken collation databasen ska använda
-        modelBuilder.UseCollation("Finnish_Swedish_CI_AS")
-// Specificerar vilken datatyp databasen ska använda för en specifik kolumn
-modelBuilder.Entity<Order>()
-.Property(o => o.PriceTotal)
-.HasColumnType(SqlDbType.Money.ToString());
+        modelBuilder.UseCollation("Finnish_Swedish_CI_AS");
+
+
+        // Specificerar vilken datatyp databasen ska använda för en specifik kolumn
+        modelBuilder.Entity<Order>()
+        .Property(o => o.PriceTotal)
+        .HasColumnType(SqlDbType.Money.ToString());
+
+
         // Specificerar data som en specifik tabell ska för-populeras med
         modelBuilder.Entity<Customer>().HasData(
         new Customer { Id = 1, CompanyName = "Company 1", City = "Stockholm" },
         new Customer { Id = 2, CompanyName = "Company 2", City = "Stockholm" },
         new Customer { Id = 3, CompanyName = "Company 3", City = "Göteborg" });
     }
-
 }
