@@ -9,20 +9,12 @@ namespace CustomersApp;
 internal class Program
 {
     /*--------------- 3 --------------------*/
-    public class Customer
-    {
-        public int Id { get; set; }
-        public string CompanyName { get; set; } = null!;
-        public string City { get; set; } = null!;
-
-        // Navigation property (One-To-Many)
-        public List<Order> Orders { get; set; } = null!;
-    }
     public class Order
     {
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public decimal PriceTotal { get; set; }
+        public DateTime Created { get; set; }
 
         // Navigation property (Many-To-One)
         public Customer Customer { get; set; } = null!;
@@ -50,6 +42,7 @@ internal class Program
         new Order { Id = 7, CustomerId = 2, PriceTotal = 1300.00m }
     };
 
+    /*-----------------------------------------------------*/
 
     static void Main(string[] args)
     { 
@@ -62,7 +55,6 @@ internal class Program
 
     private static string Input()
     {
-        //var input = Console.ReadKey(true);
         ConsoleKeyInfo Output = Console.ReadKey(true);
         return Output.KeyChar.ToString();
     }
